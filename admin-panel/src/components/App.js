@@ -3,6 +3,8 @@ import { Layout } from 'antd';
 import Header from './generic/Header'
 import Footer from './generic/Footer'
 import Sidebar from './generic/Sidebar'
+// import Person from './person/List'
+import Person from './person/New'
 import 'antd/dist/antd.css'
 import '../assets/css/general.css'
 
@@ -21,7 +23,9 @@ class App extends React.Component {
             <Sider>
               <Sidebar />
             </Sider>
-            <Content style={{padding: '80px'}}>Content</Content>
+            <Content style={{padding: '80px'}}>
+              <Person />
+            </Content>
           </Layout>
           <AntFooter>
             <Footer />
