@@ -26,11 +26,14 @@ import React from 'react';
 // import UseMemo from './session-4/26-UseMemo'
 // import UseRef from './session-4/27-UseRef'
 // import UseCallback from './session-4/28-UseCallback'
+// import Context from './session5/context/App'
 
 function App () {
   // console.log('App render')
   return (
     <div className="app">
+      {/*<Context />*/}
+
       {/*<ClassVsFunctionComponent/>*/}
       {/*<UseState/>*/}
       {/*<UseEffect/>*/}
