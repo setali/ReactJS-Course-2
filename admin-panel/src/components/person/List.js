@@ -1,5 +1,8 @@
-import { useState, useEffect} from 'react'
-import {Table} from 'antd'
+import React from 'react'
+import {connect} from 'react-redux'
+import { Link } from 'react-router-dom'
+import { Table } from 'antd'
+import { setPersons } from '../../redux/actions/person'
 
 const columns = [
   {
@@ -19,26 +22,54 @@ const columns = [
     // render: (field, record, index) => `${field.city} ${field.street}`
     render: ({city, street}) => `${city} ${street}`
   },
+  {
+    title: '',
+    dataIndex: 'actions',
+    key: 'actions',
+    render: (field, record) => <Link to={`/person/${record.id}/show`}>view</Link>
+  }
 ];
 
-function List() {
-  const [users, setUsers] = useState([])
-  const [loading, setLoading] = useState(true)
+class List extends React.Component {
+  state = {
+    loading: true
+  }
 
-  useEffect(() => {
+  componentDidMount () {
     fetch('https://jsonplaceholder.typicode.com/users')
       .then(response => response.json())
-      .then(json => setUsers(json))
-      .finally(() => setLoading(false))
-  }, [])
+      .then(data => this.props.setItems(data))
+      // .then(data => dispatch({type: 'PERSONS', payload:data}))
+      .finally(() => this.setState({loading: false}))
+  }
 
-  console.log(users)
-
-  return (
-    <div>
-      <Table dataSource={users} columns={columns} loading={loading}/>
-    </div>
-  )
+  render () {
+    return (
+      <div>
+        <Table dataSource={this.props.persons} columns={columns} loading={this.state.loading} rowKey={r => r.id}/>
+      </div>
+    )
+  }
 }
 
-export default List
+const mapStateToProps = (state) => {
+  console.log(state)
+  return {
+    persons: state.persons
+  }
+
+}
+
+/// REQUEST  =====>     AUTHENTICATED MIDDLEWARE   =========> ACTION (return JSON)
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    // setItems: (data) => dispatch({type: 'PERSONS', payload: data})
+    setItems: function (data) {
+      // dispatch({type: 'PERSONS', payload: data})
+      dispatch(setPersons(data))
+    }
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(List)
