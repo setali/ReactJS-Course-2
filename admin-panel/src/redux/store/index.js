@@ -1,15 +1,16 @@
 import {createStore, applyMiddleware} from 'redux'
-import thunk from 'redux-thunk'
+import {configureStore} from '@reduxjs/toolkit'
+// import thunk from 'redux-thunk'
 import reducers from '../reducers'
 
 
-const myMiddleware = store => next => action => {
-  if (typeof action === 'function') {
-    return action(store.dispatch, store.getState)
-  }
-
-  next(action)
-}
+// const myMiddleware = store => next => action => {
+//   if (typeof action === 'function') {
+//     return action(store.dispatch, store.getState)
+//   }
+//
+//   next(action)
+// }
 
 
 // const myMiddleware = function (store) {
@@ -29,6 +30,10 @@ const myMiddleware = store => next => action => {
 // }
 
 
-const store = createStore(reducers, applyMiddleware(thunk))
+// const store = createStore(reducers, applyMiddleware(thunk))
+
+const store = configureStore({
+  reducer: reducers
+})
 
 export default store

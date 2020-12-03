@@ -2,8 +2,7 @@ import React from 'react'
 import {connect} from 'react-redux'
 import { Link } from 'react-router-dom'
 import { Table } from 'antd'
-import axios from 'axios'
-import { setPosts, getPosts } from '../../redux/actions/post'
+import { getPosts } from '../../redux/actions/post'
 
 const columns = [
   {
@@ -20,7 +19,7 @@ const columns = [
     title: '',
     dataIndex: 'actions',
     key: 'actions',
-    render: (field, record) => <Link to={`/person/${record.id}/show`}>view</Link>
+    render: (field, record) => <Link to={`/post/${record.id}/show`}>view</Link>
   }
 ];
 
@@ -30,11 +29,10 @@ class List extends React.Component {
   }
 
   render () {
-    console.log(this.props.posts)
     return (
       <div>
-        <Table dataSource={this.props.posts.items}
-               loading={this.props.posts.loading}
+        <Table dataSource={this.props.posts}
+               loading={this.props.posts.length}
                columns={columns} rowKey={r => r.id}/>
       </div>
     )
@@ -49,8 +47,6 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    setItems: data => dispatch(setPosts(data)),
-    // getItems: () => getPosts(dispatch)
     getItems: () => dispatch(getPosts())
   }
 }

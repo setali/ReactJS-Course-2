@@ -11,9 +11,9 @@ const requestInstance = axios.create()
 
 // Add a request interceptor
 requestInstance.interceptors.request.use(function (config) {
-  console.log(config)
+  // console.log(config)
 
-  console.log(store.getState()[config.entity])
+  // console.log(store.getState()[config.entity])
   // store.dispatch({
   //   type: config.entity.toUpperCase(),
   //   payload: {...store.getState()[config.entity], loading: true}
@@ -26,7 +26,6 @@ requestInstance.interceptors.request.use(function (config) {
 
 // Add a response interceptor
 requestInstance.interceptors.response.use(function (response) {
-  console.log(response.data)
   // store.dispatch({
   //   type: response.config.entity.toUpperCase(),
   //   payload: { items: response.data, loading: false}

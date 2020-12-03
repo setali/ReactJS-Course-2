@@ -1,17 +1,17 @@
 import { combineReducers } from 'redux'
 import { persons, person } from './person'
-import { posts } from './post'
-
+import { posts, post } from './post'
+import { user, isLoggedIn, loginSubmitLoading } from './user'
 
 export default combineReducers({
   persons,
   person,
-  posts
+  posts,
+  post,
+  user,
+  isLoggedIn,
+  loginSubmitLoading
 })
-
-
-
-
 
 // export default function reducer(state = {}, action) {
 //   switch (action.type) {

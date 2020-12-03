@@ -14,6 +14,8 @@ export function setPerson(data) {
 }
 
 export function getPerson(id) {
-  return dispatch => request(`/users/${id}`)
-  .then(response => dispatch(setPerson(response.data)))
+  return function (dispatch) {
+    return request(`/users/${id}`)
+      .then(response => dispatch(setPerson(response.data)))
+  }
 }
