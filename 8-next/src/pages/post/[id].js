@@ -2,7 +2,7 @@
 import axios from 'axios'
 import Link from 'next/link'
 
-export default function Post ({post}) {
+export default function Post ({post = {}}) {
   // const {query} = useRouter()
 
   return (
